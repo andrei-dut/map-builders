@@ -92,8 +92,7 @@ const MapContainer = () => {
                 properties={{
                   id: marker.id,
                   hintContent: "Собственный значок метки с контентом",
-                  balloonContent: "А эта — новогодняя",
-                  iconContent: marker.id,
+                //   iconContent: marker.id,
                 }}
                 options={{
                   iconLayout: "default#imageWithContent",
@@ -102,7 +101,7 @@ const MapContainer = () => {
                   iconImageSize: [48, 48],
                   iconImageOffset: [-24, -24],
                   iconContentOffset: [-36, -28],
-                  iconContentLayout: layout.content,
+                //   iconContentLayout: layout.content,
                 }}
                 onClick={handlePlacemarkClick}
               />
