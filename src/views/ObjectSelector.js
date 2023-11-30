@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ReactComponent as MapMarkerSvg } from "../icons/mapMarker.svg";
 import { ReactComponent as ArrowListSvg } from "../icons/arrowCloseList.svg";
+import { ReactComponent as CloseSearchSvg } from "../icons/close.svg";
 import { ReactComponent as BuildingSvg } from "../icons/building.svg";
 import { ReactComponent as CrownBSvg } from "../icons/crownB.svg";
 import { ReactComponent as CrownRSvg } from "../icons/crownR.svg";
@@ -37,10 +38,19 @@ const InputContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  .input__close {
+    border: none;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    margin-left: 10px;
+    margin-right: 9px;
+  }
 `;
 
-const SearchIcon = styled(MapMarkerSvg)`
-  margin-right: 5px;
+const MapMarkerIcon = styled(MapMarkerSvg)`
+  margin-right: 9px;
 `;
 
 const Input = styled.input`
@@ -148,16 +158,10 @@ const Divider = styled.div`
   width: calc(100% + 20px);
 `;
 
-const ObjectSelector = ({ countries }) => {
+const ObjectSelector = ({ countries, handleMarkerClick }) => {
   const [isExpanded, setExpanded] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedCountry, setSelectedCountry] = useState([]);
-
-  // const countries = [
-  //   { name: "USA", cities: ["New York", "Los Angeles", "Chicago"] },
-  //   { name: "Canada", cities: ["Toronto", "Vancouver", "Montreal"] },
-  //   // Добавьте другие страны и города по мере необходимости
-  // ];
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -178,10 +182,12 @@ const ObjectSelector = ({ countries }) => {
     // setExpanded(true); // Не закрываем список при клике на страну
   };
 
-  const handleCityClick = (city) => {
+  const handleCityClick = (elem) => {
     // Обработка выбора города
-    console.log(`Выбран город: ${city}`);
+    handleMarkerClick(elem.coordinates);
+    console.log(`Выбран: ${elem?.name}`);
   };
+
   const getIconByStatus = (status) => {
     switch (`${status}`) {
       case "1":
@@ -216,37 +222,44 @@ const ObjectSelector = ({ countries }) => {
       return newEl;
     }) || [];
 
-  console.log(filterElems);
-  // console.log("selectedCountry", selectedCountry);
+  const filterCountries = countries?.filter(
+    (country) =>
+      country.name.toLowerCase().includes(inputValue.toLowerCase()) ||
+      country.elems.some((el) =>
+        el.name.toLowerCase().includes(inputValue.toLowerCase())
+      )
+  );
 
   return (
     <CountrySelectorContainer>
       <InputContainer>
-        <SearchIcon />
+        <MapMarkerIcon />
         <Input
           type="text"
-          placeholder="Введите страну..."
+          placeholder="Введите ТПС..."
           onFocus={() => setExpanded(true)}
           onChange={handleInputChange}
           value={inputValue}
         />
+        {isExpanded && (
+          <button
+            className="input__close"
+            onClick={() => {
+              setExpanded(false);
+              setInputValue("");
+            }}
+          >
+            <CloseSearchSvg />
+          </button>
+        )}
       </InputContainer>
       {isExpanded && <Divider />}
       <div className="scroll-container">
         {isExpanded && (
           <ListsContainer>
             <CountriesList>
-              {countries
-                .filter(
-                  (country) =>
-                    country.name
-                      .toLowerCase()
-                      .includes(inputValue.toLowerCase()) ||
-                    country.elems.some((el) =>
-                      el.name.toLowerCase().includes(inputValue.toLowerCase())
-                    )
-                )
-                .map((country) => {
+              {filterCountries?.length ? (
+                filterCountries.map((country) => {
                   const isSelectedCountry = selectedCountry.length;
                   const findedSelectedCountry = selectedCountry.find(
                     (_) => _.name === country.name
@@ -254,7 +267,6 @@ const ObjectSelector = ({ countries }) => {
                   const findedChangeLength = filterElems.find(
                     (_) => _.name === country.name
                   );
-                  console.log(findedChangeLength);
                   return (
                     <CountryItem
                       key={country.name}
@@ -266,7 +278,9 @@ const ObjectSelector = ({ countries }) => {
                       >
                         <span>
                           {country.name} (
-                          {findedChangeLength?.elems?.length || country.elems.length})
+                          {findedChangeLength?.elems?.length ||
+                            country.elems.length}
+                          )
                         </span>
                         <ArrowListSvg />
                       </div>
@@ -300,7 +314,10 @@ const ObjectSelector = ({ countries }) => {
                       ) : null}
                     </CountryItem>
                   );
-                })}
+                })
+              ) : (
+                <p>Не найдено</p>
+              )}
             </CountriesList>
           </ListsContainer>
         )}

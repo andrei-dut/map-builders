@@ -1,42 +1,64 @@
-import React, {useRef, useState } from "react";
-import {
-  YMaps,
-  Map,
-  Placemark,
-  Clusterer,
-} from "@pbe/react-yandex-maps";
-import logo from "../icons/custom-icon.svg";
+import React, { useCallback, useRef, useState } from "react";
+import { YMaps, Map, Placemark, Clusterer } from "@pbe/react-yandex-maps";
+// import logo from "../icons/custom-icon.svg";
+import BuildingSvg from "../icons/building.svg";
+import CrownBSvg from "../icons/crownB.svg";
+import CrownRSvg from "../icons/crownR.svg";
+import CrownYSvg from "../icons/crownY.svg";
+import NotWorkSvg from "../icons/notWork.svg";
+import SettingsSvg from "../icons/settings.svg";
+import ShopHouseSvg from "../icons/shopHouse.svg";
+import PredstavSvg from "../icons/predstav.svg";
 
-
-const MapContainer = ({countries: markers}) => {
+const MapContainer = ({ markers, center, zoom }) => {
   let mapRef = useRef();
-  const mapState = {
-    center: [55.751574, 37.573856], // Центр карты
-    zoom: 9, // Уровень масштабирования
-  };
-
   const [layout, setLayout] = useState();
 
+  const iconContent = useCallback(
+    (text) =>
+      `<div style="z-index: 99999;color: #1e98ff; max-width: 120px; width: 120px; display: flex; align-items: end; justify-content: center; height: 26px; font-weight: 600;text-shadow: 2px 2px 4px rgba(255, 255, 255, 1)">${text}</div>`,
+    []
+  );
+
   const handlerOnLoadMap = (ymaps) => {
-    console.log(ymaps);
+    // console.log(ymaps);
     const locationMarkBalloonContainer = ({ ymaps }) =>
-      ymaps.templateLayoutFactory.createClass(
-        '<div style="color: #000000;max-width: 120px; width: 120px; display: flex; align-items: end;justify-content: center; height: 26px">1sdfgsgdsgfdfg dfgdf</div>'
-      );
+      ymaps.templateLayoutFactory.createClass(iconContent("text"));
 
     const content = locationMarkBalloonContainer({ ymaps });
-    //   setLayout(locationMarkBalloonContainer({ ymaps }));
     setLayout({ content });
   };
-  //   console.log(layout);
 
   const handlePlacemarkClick = (e) => {
-    // Обработка клика по Placemark
     const placemarkId = e.get("target").properties.get("id");
     console.log(`Клик по метке с идентификатором ${placemarkId}`);
   };
 
-  //   console.log("mapRef", mapRef.current);
+  const getIconByStatus = (status) => {
+    switch (`${status}`) {
+      case "1":
+        return ShopHouseSvg;
+      case "2":
+        return SettingsSvg;
+      case "3":
+        return PredstavSvg;
+      case "4a":
+        return CrownYSvg;
+      case "4b":
+        return CrownRSvg;
+      case "4c":
+        return CrownBSvg;
+      case "5":
+        return BuildingSvg;
+      case "6":
+        return NotWorkSvg;
+
+      default:
+        return null;
+    }
+  };
+
+  // console.log(markers);
 
   return (
     <YMaps
@@ -46,14 +68,15 @@ const MapContainer = ({countries: markers}) => {
       }}
     >
       <Map
-        state={mapState}
+        defaultState={{ center, zoom }}
+        state={{ center, zoom }}
         width="100%"
         height="100vh"
         modules={[
           "templateLayoutFactory",
           "layout.ImageWithContent",
           //   "geoObject.addon.balloon",
-          //   "geoObject.addon.hint",
+          "geoObject.addon.hint",
         ]}
         onLoad={handlerOnLoadMap}
         instanceRef={mapRef}
@@ -73,17 +96,17 @@ const MapContainer = ({countries: markers}) => {
                 geometry={marker.coordinates}
                 properties={{
                   id: marker.id,
-                  hintContent: "Собственный значок метки с контентом",
-                //   iconContent: marker.id,
+                  hintContent: marker.name,
+                  iconContent: iconContent(marker.name),
                 }}
                 options={{
                   iconLayout: "default#imageWithContent",
                   //   iconLayout: "default#image",
-                  iconImageHref: logo,
+                  iconImageHref: getIconByStatus(marker.status),
                   iconImageSize: [48, 48],
                   iconImageOffset: [-24, -24],
                   iconContentOffset: [-36, -28],
-                //   iconContentLayout: layout.content,
+                  // iconContentLayout: layout.content,
                 }}
                 onClick={handlePlacemarkClick}
               />
