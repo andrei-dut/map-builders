@@ -658,7 +658,7 @@ export const locationsArray = [
   {
     name: "ОАО «МТЗ»",
     address: "г. Москва",
-    status: 1,
+    status: 3,
     coordinates: [55.758048, 37.637353],
     country: "Российская Федерация",
     id: "7qz21pdul8vlpl734xt",
