@@ -224,11 +224,14 @@ const ObjectSelector = ({ countries, handleMarkerClick }) => {
 
   const filterCountries = countries?.filter(
     (country) =>
-      country.name.toLowerCase().includes(inputValue.toLowerCase()) ||
+      (country.name.toLowerCase().includes(inputValue.toLowerCase()) &&
+        filterElems.find((_c) => _c.name === country.name)?.elems?.length) ||
       country.elems.some((el) =>
         el.name.toLowerCase().includes(inputValue.toLowerCase())
       )
   );
+
+  // console.log(filterElems, filterCountries);
 
   return (
     <CountrySelectorContainer>
@@ -277,10 +280,7 @@ const ObjectSelector = ({ countries, handleMarkerClick }) => {
                         onClick={() => handleCountryClick(country)}
                       >
                         <span>
-                          {country.name} (
-                          {findedChangeLength?.elems?.length ||
-                            country.elems.length}
-                          )
+                          {country.name} ({findedChangeLength?.elems?.length})
                         </span>
                         <ArrowListSvg />
                       </div>
