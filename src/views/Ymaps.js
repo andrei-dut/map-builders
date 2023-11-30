@@ -1,37 +1,19 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, {useRef, useState } from "react";
 import {
   YMaps,
   Map,
   Placemark,
   Clusterer,
-  ObjectManager,
 } from "@pbe/react-yandex-maps";
-import logo from "./custom-icon.svg";
+import logo from "../icons/custom-icon.svg";
 
-const getRandomCoordinates = () => {
-  // Генерация случайных координат в пределах Москвы
-  const latitude = 55.75 + Math.random() * 0.1;
-  const longitude = 37.6 + Math.random() * 0.1;
-  return [latitude, longitude];
-};
 
-const generateMarkers = (count) => {
-  const markers = [];
-  for (let i = 0; i < count; i++) {
-    const coordinates = getRandomCoordinates();
-    markers.push({ id: i, coordinates, name: `Маркер ${i + 1}` });
-  }
-  return markers;
-};
-
-const MapContainer = () => {
+const MapContainer = ({countries: markers}) => {
   let mapRef = useRef();
   const mapState = {
     center: [55.751574, 37.573856], // Центр карты
     zoom: 9, // Уровень масштабирования
   };
-
-  const markers = generateMarkers(76);
 
   const [layout, setLayout] = useState();
 

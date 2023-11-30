@@ -1,0 +1,312 @@
+import React, { useState } from "react";
+import { ReactComponent as MapMarkerSvg } from "../icons/mapMarker.svg";
+import { ReactComponent as ArrowListSvg } from "../icons/arrowCloseList.svg";
+import { ReactComponent as BuildingSvg } from "../icons/building.svg";
+import { ReactComponent as CrownBSvg } from "../icons/crownB.svg";
+import { ReactComponent as CrownRSvg } from "../icons/crownR.svg";
+import { ReactComponent as CrownYSvg } from "../icons/crownY.svg";
+import { ReactComponent as NotWorkSvg } from "../icons/notWork.svg";
+import { ReactComponent as SettingsSvg } from "../icons/settings.svg";
+import { ReactComponent as ShopHouseSvg } from "../icons/shopHouse.svg";
+import { ReactComponent as PredstavSvg } from "../icons/predstav.svg";
+import styled from "styled-components";
+
+const CountrySelectorContainer = styled.div`
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  padding: 12px;
+  padding-right: 2px;
+  justify-content: space-between;
+  z-index: 999; /* Если необходимо поместить поверх остальных элементов */
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  .scroll-container {
+    overflow: auto;
+    padding-right: 10px;
+  }
+`;
+
+const InputContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const SearchIcon = styled(MapMarkerSvg)`
+  margin-right: 5px;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  border: none;
+  outline: none;
+`;
+
+const ListsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CountriesList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const CountryItem = styled.li.withConfig({
+  shouldForwardProp: (prop) => !["openSubList"].includes(prop),
+})`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+
+  min-height: 48px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  margin-bottom: 12px;
+  text-align: start;
+  color: #000;
+  font-family: Montserrat;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  user-select: none;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .country-item__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & > span {
+      padding-right: 4px;
+    }
+    svg {
+      transform: ${({ openSubList }) =>
+        openSubList ? "rotate(180deg)" : "rotate(0deg)"};
+    }
+  }
+`;
+
+const ElemsList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 12px;
+`;
+
+const ElemItem = styled.li`
+  display: flex;
+  height: 55px;
+  padding: 10px 14px;
+  align-items: center;
+  gap: 11px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #fff;
+  margin-bottom: 12px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .elem__desc {
+    flex: 1;
+    .desc__name {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%; /* 13.2px */
+    }
+    .desc__address {
+      color: #000;
+      font-family: Montserrat;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 120%; /* 12px */
+    }
+  }
+`;
+
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  flex-shrink: 0;
+  opacity: 0.1;
+  background: #000;
+  margin: 12px -12px;
+  width: calc(100% + 20px);
+`;
+
+const ObjectSelector = ({ countries }) => {
+  const [isExpanded, setExpanded] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState([]);
+
+  // const countries = [
+  //   { name: "USA", cities: ["New York", "Los Angeles", "Chicago"] },
+  //   { name: "Canada", cities: ["Toronto", "Vancouver", "Montreal"] },
+  //   // Добавьте другие страны и города по мере необходимости
+  // ];
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+  };
+
+  const handleCountryClick = (country) => {
+    // console.log(country);
+    setSelectedCountry((prevSelectedCountry) => {
+      const isCountryInPrev = prevSelectedCountry.some(
+        (_) => _.name === country.name
+      );
+
+      return isCountryInPrev
+        ? prevSelectedCountry.filter((_) => _.name !== country.name)
+        : [...prevSelectedCountry, country];
+    });
+    // setExpanded(true); // Не закрываем список при клике на страну
+  };
+
+  const handleCityClick = (city) => {
+    // Обработка выбора города
+    console.log(`Выбран город: ${city}`);
+  };
+  const getIconByStatus = (status) => {
+    switch (`${status}`) {
+      case "1":
+        return <ShopHouseSvg />;
+      case "2":
+        return <SettingsSvg />;
+      case "3":
+        return <PredstavSvg />;
+      case "4a":
+        return <CrownYSvg />;
+      case "4b":
+        return <CrownRSvg />;
+      case "4c":
+        return <CrownBSvg />;
+      case "5":
+        return <BuildingSvg />;
+      case "6":
+        return <NotWorkSvg />;
+
+      default:
+        return null;
+    }
+  };
+
+  const filterElems =
+    countries.map((el) => {
+      const newEl = { ...el, elems: el.elems.map((_el) => ({ ..._el })) };
+      newEl.elems = newEl.elems.filter((_) =>
+        _.name.toLowerCase().includes(inputValue.toLowerCase())
+      );
+
+      return newEl;
+    }) || [];
+
+  console.log(filterElems);
+  // console.log("selectedCountry", selectedCountry);
+
+  return (
+    <CountrySelectorContainer>
+      <InputContainer>
+        <SearchIcon />
+        <Input
+          type="text"
+          placeholder="Введите страну..."
+          onFocus={() => setExpanded(true)}
+          onChange={handleInputChange}
+          value={inputValue}
+        />
+      </InputContainer>
+      {isExpanded && <Divider />}
+      <div className="scroll-container">
+        {isExpanded && (
+          <ListsContainer>
+            <CountriesList>
+              {countries
+                .filter(
+                  (country) =>
+                    country.name
+                      .toLowerCase()
+                      .includes(inputValue.toLowerCase()) ||
+                    country.elems.some((el) =>
+                      el.name.toLowerCase().includes(inputValue.toLowerCase())
+                    )
+                )
+                .map((country) => {
+                  const isSelectedCountry = selectedCountry.length;
+                  const findedSelectedCountry = selectedCountry.find(
+                    (_) => _.name === country.name
+                  );
+                  const findedChangeLength = filterElems.find(
+                    (_) => _.name === country.name
+                  );
+                  console.log(findedChangeLength);
+                  return (
+                    <CountryItem
+                      key={country.name}
+                      openSubList={isSelectedCountry && findedSelectedCountry}
+                    >
+                      <div
+                        className="country-item__head"
+                        onClick={() => handleCountryClick(country)}
+                      >
+                        <span>
+                          {country.name} (
+                          {findedChangeLength?.elems?.length || country.elems.length})
+                        </span>
+                        <ArrowListSvg />
+                      </div>
+
+                      {isSelectedCountry && findedSelectedCountry ? (
+                        <ElemsList>
+                          {findedSelectedCountry.elems
+                            .filter((elem) =>
+                              elem.name
+                                .toLowerCase()
+                                .includes(inputValue.toLowerCase())
+                            )
+                            .map((elem, index) => (
+                              <ElemItem
+                                key={index}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCityClick(elem);
+                                }}
+                              >
+                                {getIconByStatus(elem.status)}
+                                <div className="elem__desc">
+                                  <p className="desc__name">{elem.name}</p>
+                                  <p className="desc__address">
+                                    {elem.address}
+                                  </p>
+                                </div>
+                              </ElemItem>
+                            ))}
+                        </ElemsList>
+                      ) : null}
+                    </CountryItem>
+                  );
+                })}
+            </CountriesList>
+          </ListsContainer>
+        )}
+      </div>
+    </CountrySelectorContainer>
+  );
+};
+
+export default ObjectSelector;
