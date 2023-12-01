@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as BuildingSvg } from "../icons/building.svg";
+// import { ReactComponent as BuildingSvg } from "../icons/building.svg";
 import { ReactComponent as CrownBSvg } from "../icons/crownB.svg";
 import { ReactComponent as CrownRSvg } from "../icons/crownR.svg";
 import { ReactComponent as CrownYSvg } from "../icons/crownY.svg";
@@ -8,6 +8,7 @@ import { ReactComponent as NotWorkSvg } from "../icons/notWork.svg";
 import { ReactComponent as SettingsSvg } from "../icons/settings.svg";
 import { ReactComponent as ShopHouseSvg } from "../icons/shopHouse.svg";
 import { ReactComponent as PredstavSvg } from "../icons/predstav.svg";
+import { ReactComponent as StarSvg } from "../icons/star.svg";
 
 const WrapMapLegend = styled.div`
   width: 260px;
@@ -92,16 +93,12 @@ const MapLegend = () => {
           <p>Сборочное производство (СП)</p>
         </IconWrapper>
         <IconWrapper>
-          <PredstavSvg />
-          <p>Представительства</p>
-        </IconWrapper>
-        <IconWrapper>
-          <BuildingSvg />
-          <p>В стадии создания</p>
-        </IconWrapper>
-        <IconWrapper>
           <NotWorkSvg />
           <p>Неработающие</p>
+        </IconWrapper>
+        <IconWrapper>
+          <PredstavSvg />
+          <p>Представительства</p>
         </IconWrapper>
       </IconsContainer>
 
@@ -121,8 +118,22 @@ const MapLegend = () => {
           <p>Без доли участия белорусских предприятий</p>
         </IconWrapper>
       </IconsContainer>
+
+      <Divider />
+      <IconsContainer>
+        <IconWrapper>
+          <StarSvg />
+          <p>Иные субъекты ТПС <br/> (не имеющие доли собственности)</p>
+        </IconWrapper>
+      </IconsContainer>
     </WrapMapLegend>
   );
 };
 
 export default MapLegend;
+
+
+// <IconWrapper>
+// <BuildingSvg />
+// <p>В стадии создания</p>
+// </IconWrapper>

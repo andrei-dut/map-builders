@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { YMaps, Map, Placemark, Clusterer } from "@pbe/react-yandex-maps";
 // import logo from "../icons/custom-icon.svg";
-import BuildingSvg from "../icons/building.svg";
+// import BuildingSvg from "../icons/building.svg";
 import CrownBSvg from "../icons/crownB.svg";
 import CrownRSvg from "../icons/crownR.svg";
 import CrownYSvg from "../icons/crownY.svg";
@@ -16,7 +16,7 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
 
   const iconContent = useCallback(
     (text) =>
-      `<div style="z-index: 99999;color: #1e98ff; max-width: 120px; width: 120px; display: flex; align-items: end; justify-content: center; height: 26px; font-weight: 600;text-shadow: 2px 2px 4px rgba(255, 255, 255, 1)">${text}</div>`,
+      `<div style="font-size: 14px;z-index: 99999;color: #1e98ff; max-width: 120px; width: 120px; display: flex; align-items: end; justify-content: center; height: 26px; font-weight: 600;text-shadow: 2px 2px 4px rgba(255, 255, 255, 1)">${text}</div>`,
     []
   );
 
@@ -58,8 +58,8 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
         return CrownRSvg;
       case "4c":
         return CrownBSvg;
-      case "5":
-        return BuildingSvg;
+      // case "5":
+      //   return BuildingSvg;
       case "6":
         return NotWorkSvg;
 
@@ -114,15 +114,15 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
                   iconLayout: "default#imageWithContent",
                   //   iconLayout: "default#image",
                   iconImageHref: getIconByStatus(marker.status),
-                  iconImageSize: [48, 48],
-                  iconImageOffset: [-24, -24],
-                  iconContentOffset: [-36, -28],
+                  iconImageSize: [28, 28],
+                  iconImageOffset: [-14, -14],
+                  iconContentOffset: [-46, -28],
                   // iconContentLayout: layout.content,
                 }}
                 onClick={handlePlacemarkClick}
               />
             ))}
-        </Clusterer>
+        </Clusterer> 
       </Map>
     </YMaps>
   );

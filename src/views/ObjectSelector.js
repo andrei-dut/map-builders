@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ReactComponent as MapMarkerSvg } from "../icons/mapMarker.svg";
 import { ReactComponent as ArrowListSvg } from "../icons/arrowCloseList.svg";
 import { ReactComponent as CloseSearchSvg } from "../icons/close.svg";
-import { ReactComponent as BuildingSvg } from "../icons/building.svg";
+// import { ReactComponent as BuildingSvg } from "../icons/building.svg";
 import { ReactComponent as CrownBSvg } from "../icons/crownB.svg";
 import { ReactComponent as CrownRSvg } from "../icons/crownR.svg";
 import { ReactComponent as CrownYSvg } from "../icons/crownY.svg";
@@ -202,8 +202,8 @@ const ObjectSelector = ({ countries, handleMarkerClick }) => {
         return <CrownRSvg />;
       case "4c":
         return <CrownBSvg />;
-      case "5":
-        return <BuildingSvg />;
+      // case "5":
+      //   return <BuildingSvg />;
       case "6":
         return <NotWorkSvg />;
 
