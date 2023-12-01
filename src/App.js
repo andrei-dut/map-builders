@@ -8,8 +8,8 @@ import React, { useMemo, useState } from "react";
 
 function App() {
 
-  const center = [55.755773, 37.617761]; // Центр карты
-  const zoom = 10; // Масштаб карты
+  const center = [0, 0]; // Центр карты
+  const zoom = 3; // Масштаб карты
 
 
   const countries = useMemo(() => {

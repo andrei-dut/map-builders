@@ -30,8 +30,17 @@ const MapContainer = ({ markers, center, zoom }) => {
   };
 
   const handlePlacemarkClick = (e) => {
-    const placemarkId = e.get("target").properties.get("id");
-    console.log(`Клик по метке с идентификатором ${placemarkId}`);
+    const placemarkId = e.get("target")?.properties?.get("id");
+    const _coordinates = e.get("target")?.properties?.get("_coordinates");
+    console.log(`Клик по метке с идентификатором ${placemarkId}`, _coordinates);
+
+    setTimeout(() => {
+      if(mapRef.current?.setCenter)
+      mapRef.current.setCenter(_coordinates, 8, {
+        duration: 500,
+      });
+    }, 0);
+
   };
 
   const getIconByStatus = (status) => {
@@ -98,6 +107,7 @@ const MapContainer = ({ markers, center, zoom }) => {
                   id: marker.id,
                   hintContent: marker.name,
                   iconContent: iconContent(marker.name),
+                  _coordinates: marker.coordinates
                 }}
                 options={{
                   iconLayout: "default#imageWithContent",
