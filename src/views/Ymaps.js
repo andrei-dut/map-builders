@@ -10,7 +10,7 @@ import SettingsSvg from "../icons/settings.svg";
 import ShopHouseSvg from "../icons/shopHouse.svg";
 import PredstavSvg from "../icons/predstav.svg";
 
-const MapContainer = ({ markers, center, zoom }) => {
+const MapContainer = ({ markers, stateMap, setSlideId }) => {
   let mapRef = useRef();
   const [layout, setLayout] = useState();
 
@@ -35,12 +35,13 @@ const MapContainer = ({ markers, center, zoom }) => {
     console.log(`Клик по метке с идентификатором ${placemarkId}`, _coordinates);
 
     setTimeout(() => {
-      if(mapRef.current?.setCenter)
-      mapRef.current.setCenter(_coordinates, 8, {
-        duration: 500,
-      });
+      if (mapRef.current?.setCenter) {
+        mapRef.current.setCenter(_coordinates, 8, {
+          duration: 500,
+        });
+        setSlideId(placemarkId);
+      }
     }, 0);
-
   };
 
   const getIconByStatus = (status) => {
@@ -77,8 +78,8 @@ const MapContainer = ({ markers, center, zoom }) => {
       }}
     >
       <Map
-        defaultState={{ center, zoom }}
-        state={{ center, zoom }}
+        defaultState={stateMap}
+        state={stateMap}
         width="100%"
         height="100vh"
         modules={[
@@ -107,7 +108,7 @@ const MapContainer = ({ markers, center, zoom }) => {
                   id: marker.id,
                   hintContent: marker.name,
                   iconContent: iconContent(marker.name),
-                  _coordinates: marker.coordinates
+                  _coordinates: marker.coordinates,
                 }}
                 options={{
                   iconLayout: "default#imageWithContent",
@@ -127,4 +128,4 @@ const MapContainer = ({ markers, center, zoom }) => {
   );
 };
 
-export default MapContainer;
+export default React.memo(MapContainer);

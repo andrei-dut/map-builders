@@ -4,12 +4,10 @@ import ObjectSelector from "./views/ObjectSelector";
 import MapContainer from "./views/Ymaps";
 import { locationsArray } from "./locations";
 import React, { useMemo, useState } from "react";
+import PreviewSlide from "./views/PreviewSlide";
 
 
 function App() {
-
-  const center = [0, 0]; // Центр карты
-  const zoom = 3; // Масштаб карты
 
 
   const countries = useMemo(() => {
@@ -24,21 +22,23 @@ function App() {
       return prev;
     }, []);
   }, []); 
-  
+
+  const [slideId, setSlideId] = useState(null);
 
 
-  const [selectedCoords, setSelectedCoords] = useState(center);
+  const [stateMap, setStateMap] = useState({center: [0, 0], zoom: 3});
 
-  const handleMarkerClick = (coords) => {
-    setSelectedCoords(coords);
+  const handleMarkerClickFromList = (coords) => {
+    setStateMap({center: coords, zoom: 8});
   };
 
 
   return (
     <div className="App">
-      <ObjectSelector countries={countries} handleMarkerClick={handleMarkerClick}/>
-      <MapContainer markers={locationsArray} center={selectedCoords} zoom={zoom}/>
+      <ObjectSelector countries={countries} handleMarkerClick={handleMarkerClickFromList} />
+      <MapContainer markers={locationsArray} stateMap={stateMap} setSlideId={setSlideId}/>
       <MapLegend />
+      <PreviewSlide slideId={slideId} setSlideId={setSlideId}/>
     </div>
   );
 }
