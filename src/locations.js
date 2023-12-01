@@ -251,7 +251,7 @@ export const locationsArray = [
     name: 'ООО "ТД "Белкард"',
     country: "Российская Федерация",
     address: "г. Казань",
-    status: 5,
+    status: 6,
     coordinates: [55.827803, 49.063232],
     id: "urwc9aoe7flpl734xt",
   },
