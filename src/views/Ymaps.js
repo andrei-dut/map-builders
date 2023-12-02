@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
-import { YMaps, Map, Placemark, Clusterer } from "@pbe/react-yandex-maps";
+import { YMaps, Map, Placemark, Clusterer } from "react-yandex-maps";
 // import logo from "../icons/custom-icon.svg";
 // import BuildingSvg from "../icons/building.svg";
 import CrownBSvg from "../icons/crownB.svg";
@@ -10,7 +10,7 @@ import SettingsSvg from "../icons/settings.svg";
 import ShopHouseSvg from "../icons/shopHouse.svg";
 import PredstavSvg from "../icons/predstav.svg";
 
-const MapContainer = ({ markers, stateMap, setSlideId }) => {
+const MapContainer = ({ markers, stateMap, setSlideId, getCoordByYmap }) => {
   let mapRef = useRef();
   const [layout, setLayout] = useState();
 
@@ -22,6 +22,8 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
 
   const handlerOnLoadMap = (ymaps) => {
     // console.log(ymaps);
+
+    getCoordByYmap?.(ymaps)
     const locationMarkBalloonContainer = ({ ymaps }) =>
       ymaps.templateLayoutFactory.createClass(iconContent("text"));
 
@@ -71,12 +73,7 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
   // console.log(markers);
 
   return (
-    <YMaps
-      query={{
-        apikey: "8334e7a6-6bb1-44c2-a061-4d1f8662219d",
-        // load: "package.full",
-      }}
-    >
+    <YMaps query={{ apikey: "6b70571d-3060-45ee-8ac0-cb21e5594ed5" }}>
       <Map
         defaultState={stateMap}
         state={stateMap}
@@ -87,6 +84,9 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
           "layout.ImageWithContent",
           //   "geoObject.addon.balloon",
           "geoObject.addon.hint",
+          "search",
+
+
         ]}
         onLoad={handlerOnLoadMap}
         instanceRef={mapRef}
