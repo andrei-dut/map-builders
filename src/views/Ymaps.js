@@ -106,7 +106,7 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
                 geometry={marker.coordinates}
                 properties={{
                   id: marker.id,
-                  hintContent: marker.name,
+                  hintContent: marker.holding ||  marker.name,
                   iconContent: iconContent(marker.name),
                   _coordinates: marker.coordinates,
                 }}
