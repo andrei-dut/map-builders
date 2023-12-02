@@ -9,8 +9,9 @@ import NotWorkSvg from "../icons/notWork.svg";
 import SettingsSvg from "../icons/settings.svg";
 import ShopHouseSvg from "../icons/shopHouse.svg";
 import PredstavSvg from "../icons/predstav.svg";
+import StarSvg from "../icons/star.svg";
 
-const MapContainer = ({ markers, stateMap, setSlideId, getCoordByYmap }) => {
+const MapContainer = ({ markers, stateMap, setSlideId }) => {
   let mapRef = useRef();
   const [layout, setLayout] = useState();
 
@@ -23,7 +24,6 @@ const MapContainer = ({ markers, stateMap, setSlideId, getCoordByYmap }) => {
   const handlerOnLoadMap = (ymaps) => {
     // console.log(ymaps);
 
-    getCoordByYmap?.(ymaps)
     const locationMarkBalloonContainer = ({ ymaps }) =>
       ymaps.templateLayoutFactory.createClass(iconContent("text"));
 
@@ -66,14 +66,14 @@ const MapContainer = ({ markers, stateMap, setSlideId, getCoordByYmap }) => {
         return NotWorkSvg;
 
       default:
-        return null;
+        return StarSvg;
     }
   };
 
   // console.log(markers);
 
   return (
-    <YMaps query={{ apikey: "6b70571d-3060-45ee-8ac0-cb21e5594ed5" }}>
+ <YMaps query={{ apikey: "6b70571d-3060-45ee-8ac0-cb21e5594ed5" }}>
       <Map
         defaultState={stateMap}
         state={stateMap}
