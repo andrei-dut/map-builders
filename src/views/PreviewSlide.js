@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ReactComponent as CloseSlideSvg } from "../icons/closeSlide.svg";
 import { testSlide } from "../slides";
+// import PdfViewer from "./PdfViewer";
 
 const WrapSlide = styled.div`
   position: fixed;
@@ -53,6 +54,7 @@ const PreviewSlide = ({ setSlideId, slideId }) => {
         <button className="slide__close" onClick={() => setSlideId(null)}>
           <CloseSlideSvg />
         </button>
+        {/* <PdfViewer/> */}
         <img src={testSlide} alt={slideId} />
       </div>
     </WrapSlide>
