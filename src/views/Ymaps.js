@@ -16,8 +16,8 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
   const [layout, setLayout] = useState();
 
   const iconContent = useCallback(
-    (text) =>
-      `<div style="font-size: 14px;z-index: 99999;color: #1e98ff; max-width: 120px; width: 120px; display: flex; align-items: end; justify-content: center; height: 26px; font-weight: 600;text-shadow: 2px 2px 4px rgba(255, 255, 255, 1)">${text}</div>`,
+    (text, fontSize, color) =>
+      `<div style="font-size: ${fontSize}px;z-index: 99999;color: ${color}; max-width: 120px; width: 120px; display: flex; align-items: end; justify-content: center; height: 26px; font-weight: 600;text-shadow: 2px 2px 4px rgba(255, 255, 255, 1)">${text}</div>`,
     []
   );
 
@@ -107,16 +107,16 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
                 properties={{
                   id: marker.id,
                   hintContent: marker.holding ||  marker.name,
-                  iconContent: iconContent(marker.name),
+                  iconContent: iconContent(marker.name, marker.holding ? 10 : 14, marker.holding? '#1470bd' : '#1e98ff'),
                   _coordinates: marker.coordinates,
                 }}
                 options={{
                   iconLayout: "default#imageWithContent",
                   //   iconLayout: "default#image",
                   iconImageHref: getIconByStatus(marker.status),
-                  iconImageSize: [28, 28],
-                  iconImageOffset: [-14, -14],
-                  iconContentOffset: [-46, -28],
+                  iconImageSize: marker.holding ? [14, 14] : [28, 28],
+                  iconImageOffset: [-7, -7],
+                  iconContentOffset: [-53, -28],
                   // iconContentLayout: layout.content,
                 }}
                 onClick={handlePlacemarkClick}
