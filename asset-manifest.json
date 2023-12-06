@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/map-builders/static/css/main.e6297f40.css",
-    "main.js": "/map-builders/static/js/main.2e92d4b3.js",
+    "main.css": "/map-builders/static/css/main.031b3afa.css",
+    "main.js": "/map-builders/static/js/main.20df9864.js",
     "static/js/787.8bcae773.chunk.js": "/map-builders/static/js/787.8bcae773.chunk.js",
     "static/media/Montserrat-Italic-VariableFont_wght.ttf": "/map-builders/static/media/Montserrat-Italic-VariableFont_wght.7451547bd28d8dddbeea.ttf",
     "static/media/Montserrat-VariableFont_wght.ttf": "/map-builders/static/media/Montserrat-VariableFont_wght.7e687123cd4528224ce5.ttf",
@@ -38,12 +38,12 @@
     "static/media/crownY.svg": "/map-builders/static/media/crownY.67416138873cbca2bb99f002aded9718.svg",
     "static/media/arrowCloseList.svg": "/map-builders/static/media/arrowCloseList.224d5c686caf4f130244d417293f08a2.svg",
     "static/media/predstav.svg": "/map-builders/static/media/predstav.39bd72bf788ced3c6623bf3a181b517c.svg",
-    "main.e6297f40.css.map": "/map-builders/static/css/main.e6297f40.css.map",
-    "main.2e92d4b3.js.map": "/map-builders/static/js/main.2e92d4b3.js.map",
+    "main.031b3afa.css.map": "/map-builders/static/css/main.031b3afa.css.map",
+    "main.20df9864.js.map": "/map-builders/static/js/main.20df9864.js.map",
     "787.8bcae773.chunk.js.map": "/map-builders/static/js/787.8bcae773.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6297f40.css",
-    "static/js/main.2e92d4b3.js"
+    "static/css/main.031b3afa.css",
+    "static/js/main.20df9864.js"
   ]
 }
