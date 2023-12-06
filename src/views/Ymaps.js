@@ -11,7 +11,7 @@ import ShopHouseSvg from "../icons/shopHouse.svg";
 import PredstavSvg from "../icons/predstav.svg";
 import StarSvg from "../icons/star.svg";
 
-const MapContainer = ({ markers, stateMap, setSlideId }) => {
+const MapContainer = ({ markers, markers2, stateMap, setSlideId }) => {
   let mapRef = useRef();
   const [layout, setLayout] = useState();
 
@@ -28,7 +28,7 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
       ymaps.templateLayoutFactory.createClass(iconContent("text"));
 
     const content = locationMarkBalloonContainer({ ymaps });
-    setLayout({ content });
+    // setLayout({ content });
   };
 
   const handlePlacemarkClick = (e) => {
@@ -38,10 +38,10 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
 
     setTimeout(() => {
       if (mapRef.current?.setCenter) {
-        mapRef.current.setCenter(_coordinates, 8, {
+        mapRef.current.setCenter(_coordinates, 10, {
           duration: 500,
         });
-        setSlideId(placemarkId);
+        // setSlideId(placemarkId);
       }
     }, 0);
   };
@@ -73,7 +73,7 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
   // console.log(markers);
 
   return (
- <YMaps query={{ apikey: "6b70571d-3060-45ee-8ac0-cb21e5594ed5" }}>
+    <YMaps query={{ apikey: "6b70571d-3060-45ee-8ac0-cb21e5594ed5" }}>
       <Map
         defaultState={stateMap}
         state={stateMap}
@@ -85,8 +85,6 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
           //   "geoObject.addon.balloon",
           "geoObject.addon.hint",
           "search",
-
-
         ]}
         onLoad={handlerOnLoadMap}
         instanceRef={mapRef}
@@ -95,19 +93,21 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
           options={{
             groupByCoordinates: false,
             // gridSize: 128,
-            // preset: "islands#invertedVioletClusterIcons",
           }}
           propertie={{ hintContent: "Мало меток" }}
         >
-          {layout &&
-            markers.map((marker) => (
+          {markers.map((marker) => (
               <Placemark
                 key={marker.id}
                 geometry={marker.coordinates}
                 properties={{
                   id: marker.id,
-                  hintContent: marker.holding ||  marker.name,
-                  iconContent: iconContent(marker.name, marker.holding ? 10 : 14, marker.holding? '#1470bd' : '#1e98ff'),
+                  hintContent: marker.holding || marker.name,
+                  iconContent: iconContent(
+                    marker.name,
+                    marker.holding ? 10 : 14,
+                    marker.holding ? "#1470bd" : "#1e98ff"
+                  ),
                   _coordinates: marker.coordinates,
                 }}
                 options={{
@@ -122,7 +122,44 @@ const MapContainer = ({ markers, stateMap, setSlideId }) => {
                 onClick={handlePlacemarkClick}
               />
             ))}
-        </Clusterer> 
+        </Clusterer>
+        <Clusterer
+          options={{
+            groupByCoordinates: false,
+            // gridSize: 33,
+            preset: "islands#invertedRedClusterIcons", // Стиль для красных кластеров
+            minClusterSize: 4,
+          }}
+          propertie={{ hintContent: "Мало меток" }}
+        >
+          {
+            markers2.map((marker) => (
+              <Placemark
+                key={marker.id}
+                geometry={marker.coordinates}
+                properties={{
+                  id: marker.id,
+                  hintContent: marker.holding || marker.name,
+                  iconContent: iconContent(
+                    marker.name,
+                    marker.holding ? 10 : 14,
+                    marker.holding ? "#1470bd" : "#1e98ff"
+                  ),
+                  _coordinates: marker.coordinates,
+                }}
+                options={{
+                  iconLayout: "default#imageWithContent",
+                  //   iconLayout: "default#image",
+                  iconImageHref: getIconByStatus(marker.status),
+                  iconImageSize: marker.holding ? [14, 14] : [28, 28],
+                  iconImageOffset: [-7, -7],
+                  iconContentOffset: [-53, -28],
+                  // iconContentLayout: layout.content,
+                }}
+                onClick={handlePlacemarkClick}
+              />
+            ))}
+        </Clusterer>
       </Map>
     </YMaps>
   );

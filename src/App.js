@@ -30,17 +30,23 @@ function App() {
   const [stateMap, setStateMap] = useState({ center: [0, 0], zoom: 3 });
 
   const handleMarkerClickFromList = (coords) => {
-    setStateMap({ center: coords, zoom: 8 });
+    setStateMap({ center: coords, zoom: 10 });
   };
 
   return (
     <div className="App">
+      <div className='app-head'>
+      <h1 className='app__header'>Карта расположения субъектов ТПС предприятий системы Министерства промышленности Республики Беларусь</h1>
       <ObjectSelector
         countries={countries}
         handleMarkerClick={handleMarkerClickFromList}
       />
+      </div>
+      
+
       <MapContainer
-        markers={locationsArray.concat([].concat(...Object.values(jsonData)))}
+        markers={locationsArray}
+        markers2={Object.values(jsonData)}
         stateMap={stateMap}
         setSlideId={setSlideId}     />
       <MapLegend />

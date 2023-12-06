@@ -13,7 +13,7 @@ import { ReactComponent as PredstavSvg } from "../icons/predstav.svg";
 import styled from "styled-components";
 
 const CountrySelectorContainer = styled.div`
-  position: fixed;
+  position: relative;
   top: 8px;
   left: 8px;
   max-height: 70vh;
@@ -28,6 +28,11 @@ const CountrySelectorContainer = styled.div`
   background: #fff;
   box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.15);
   overflow: hidden;
+  @media (max-width: 568px) {
+    width: 220px;
+    top: 2px;
+  left: 2px;
+  }
   .scroll-container {
     overflow: auto;
     padding-right: 10px;
@@ -38,6 +43,13 @@ const InputContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  & > svg {
+    min-width: 12px;
+
+    @media (max-width: 568px) {
+      width: 12px;
+    }
+  }
   .input__close {
     border: none;
     background: transparent;
@@ -46,6 +58,9 @@ const InputContainer = styled.div`
     display: flex;
     margin-left: 10px;
     margin-right: 9px;
+    @media (max-width: 568px) {
+      width: 20px;
+    }
   }
 `;
 
@@ -57,6 +72,9 @@ const Input = styled.input`
   flex: 1;
   border: none;
   outline: none;
+  @media (max-width: 568px) {
+    font-size: 10px;
+  }
 `;
 
 const ListsContainer = styled.div`
@@ -90,6 +108,9 @@ const CountryItem = styled.li.withConfig({
   font-style: normal;
   font-weight: 700;
   user-select: none;
+  @media (max-width: 568px) {
+    font-size: 10px;
+  }
   &:last-child {
     margin-bottom: 0;
   }
@@ -136,6 +157,9 @@ const ElemItem = styled.li`
       font-style: normal;
       font-weight: 700;
       line-height: 120%; /* 13.2px */
+      @media (max-width: 568px) {
+    font-size: 9px;
+  }
     }
     .desc__address {
       color: #000;
@@ -144,6 +168,9 @@ const ElemItem = styled.li`
       font-style: normal;
       font-weight: 400;
       line-height: 120%; /* 12px */
+      @media (max-width: 568px) {
+    font-size: 8px;
+  }
     }
   }
 `;
