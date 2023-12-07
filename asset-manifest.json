@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/map-builders/static/css/main.031b3afa.css",
-    "main.js": "/map-builders/static/js/main.20df9864.js",
+    "main.js": "/map-builders/static/js/main.02b7c97b.js",
     "static/js/787.8bcae773.chunk.js": "/map-builders/static/js/787.8bcae773.chunk.js",
     "static/media/Montserrat-Italic-VariableFont_wght.ttf": "/map-builders/static/media/Montserrat-Italic-VariableFont_wght.7451547bd28d8dddbeea.ttf",
     "static/media/Montserrat-VariableFont_wght.ttf": "/map-builders/static/media/Montserrat-VariableFont_wght.7e687123cd4528224ce5.ttf",
@@ -25,25 +25,25 @@
     "static/media/Montserrat-ExtraLight.ttf": "/map-builders/static/media/Montserrat-ExtraLight.d928d1131a9af02cb672.ttf",
     "static/media/Montserrat-Thin.ttf": "/map-builders/static/media/Montserrat-Thin.9a7aece9cfe235bc0920.ttf",
     "static/media/test2.jpg": "/map-builders/static/media/test2.bfc02b857dbe46b3f474.jpg",
-    "static/media/settings.svg": "/map-builders/static/media/settings.a8eedc11fa23e8e179fa8c32050eaac8.svg",
-    "static/media/shopHouse.svg": "/map-builders/static/media/shopHouse.8bae958b72be707ff1ec90d879476416.svg",
-    "static/media/close.svg": "/map-builders/static/media/close.9ca3719955527b7161940823ed486d18.svg",
-    "static/media/closeSlide.svg": "/map-builders/static/media/closeSlide.1885866e2aad79a4d15fbad6b19a41b8.svg",
+    "static/media/settings.svg": "/map-builders/static/media/settings.6b9f56c12fa725901d2c84b9fc1727ff.svg",
+    "static/media/shopHouse.svg": "/map-builders/static/media/shopHouse.3ecd202e3af6cd7273a43053ea582c02.svg",
+    "static/media/close.svg": "/map-builders/static/media/close.ffe52db88fc8b33630e515bfe88c10cb.svg",
+    "static/media/closeSlide.svg": "/map-builders/static/media/closeSlide.bab5825d7bdcdafe52ec68071f402999.svg",
     "index.html": "/map-builders/index.html",
-    "static/media/mapMarker.svg": "/map-builders/static/media/mapMarker.7511550ed29c22d0631e67c96b084667.svg",
-    "static/media/notWork.svg": "/map-builders/static/media/notWork.ce6ea5b2457f63c66ab84f151492d355.svg",
-    "static/media/star.svg": "/map-builders/static/media/star.f7ae1a1c242d621c16c44d223356b1f7.svg",
-    "static/media/crownB.svg": "/map-builders/static/media/crownB.d5426e284ad1527a90b65423f9300c29.svg",
-    "static/media/crownR.svg": "/map-builders/static/media/crownR.cfa0ce1e3b1e1d5e9658a827b9bdbb92.svg",
-    "static/media/crownY.svg": "/map-builders/static/media/crownY.67416138873cbca2bb99f002aded9718.svg",
-    "static/media/arrowCloseList.svg": "/map-builders/static/media/arrowCloseList.224d5c686caf4f130244d417293f08a2.svg",
-    "static/media/predstav.svg": "/map-builders/static/media/predstav.39bd72bf788ced3c6623bf3a181b517c.svg",
+    "static/media/mapMarker.svg": "/map-builders/static/media/mapMarker.b9efa6c1753e4156151a2569ba4e4cb0.svg",
+    "static/media/notWork.svg": "/map-builders/static/media/notWork.27110071ac41440c5c25ecad645a5875.svg",
+    "static/media/star.svg": "/map-builders/static/media/star.df036091468371aedc614b8f1cd43e5f.svg",
+    "static/media/crownB.svg": "/map-builders/static/media/crownB.f6316b1ba4f7cba45833a0b3ebc9801d.svg",
+    "static/media/crownR.svg": "/map-builders/static/media/crownR.ecfcb5f1f40b076b3aeb1b1703c53142.svg",
+    "static/media/crownY.svg": "/map-builders/static/media/crownY.aba3d64dd242adaa2278862141c5570c.svg",
+    "static/media/arrowCloseList.svg": "/map-builders/static/media/arrowCloseList.957d0a7bf6ccc1e0a97746f8ae93c990.svg",
+    "static/media/predstav.svg": "/map-builders/static/media/predstav.46d77f0857ea44fc49406506d9f2fd84.svg",
     "main.031b3afa.css.map": "/map-builders/static/css/main.031b3afa.css.map",
-    "main.20df9864.js.map": "/map-builders/static/js/main.20df9864.js.map",
+    "main.02b7c97b.js.map": "/map-builders/static/js/main.02b7c97b.js.map",
     "787.8bcae773.chunk.js.map": "/map-builders/static/js/787.8bcae773.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.031b3afa.css",
-    "static/js/main.20df9864.js"
+    "static/js/main.02b7c97b.js"
   ]
 }
