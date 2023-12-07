@@ -268,7 +268,7 @@ export const locationsArray = [
     country: "Российская Федерация",
     address: "п. Элитный",
     status: "1",
-    coordinates: [54.918022, 82.95921],
+    coordinates: [54.918011, 82.958860],
     id: "iif0inqkublpl734xt",
   },
   {
@@ -276,7 +276,7 @@ export const locationsArray = [
     country: "Российская Федерация",
     address: "п. Элитный",
     status: "4b",
-    coordinates: [54.918022, 82.95921],
+    coordinates: [54.917987, 82.959494],
     id: "3fige2b5f6wlpl734xt",
   },
   {
@@ -350,14 +350,6 @@ export const locationsArray = [
     status: "6",
     coordinates: [50.43186, 30.354936],
     id: "1kns5tucnhshlpl734xt",
-  },
-  {
-    name: 'ООО "ТД "МТЗ-Беларус-Украина"',
-    country: "Украина",
-    address: "с. Константиновка",
-    status: "6",
-    coordinates: [47.094789, 31.931317],
-    id: "b0dz6zvan9tlpl734xt",
   },
   {
     name: "ООО «Украгробелмаш»",
